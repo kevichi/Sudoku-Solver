@@ -3,52 +3,67 @@ class Solver:
 	board = []
 	def __init__(self, board):
 		self.board = board
+		self.size =9
+
 		print("welcome to sudoku solver")
 	
-	def checkRow(row, value):
-		for i in range(size):
-			if board [row][i] == value:
-				return false
-		return true
+	def checkRow(self, row, value):
+		for i in range(9):
+			if self.board [row][i] == value:
+				return False
+		return True
 
-	def checkColumn(column, value):
-		for i in range(size):
-			if board [i][column] == value:
-				return false
-		return true
+	def checkColumn(self, column, value):
+		for i in range(9):
+			if self.board [i][column] == value:
+				return False
+		return True
 
-	def checkBlock(row, column, value):
+	def checkBlock(self, row, column, value):
 		xVal = (row // 3) * 3
 		yVal = (column // 3) * 3
 		for i in range(xVal, xVal +3):
 			for j in range(yVal, yVal +3):
-				if board[i][j] == value:
-					return false
-		return true
+				if self.board[i][j] == value:
+					return False
+		return True
 
-	def isValid(row, column, value):
-		if checkRow(row,value) and checkColumn(column,value) and checkBlock(row,column,value):
-			return true
+	def isValid(self, row, column, value):
+		if self.checkRow(row,value) and self.checkColumn(column,value) and self.checkBlock(row,column,value):
+			return True
 
-	def getNextBlank(b):
-		for i in range(size):
-			for j in range(size):
+	def getNextBlank(self,b):
+		for i in range(self.size):
+			for j in range(self.size):
 				if b[i][j] == 0:
 					return (i,j)
 
+		return None
+
 	def solvePuzzle(self,b):
 		nextBlock = self.getNextBlank(b)
-		xPos = nextBlock[0]
-		yPos = nextBlock[1]
+		
 
-		if not getNextBlank(b):
-			return true
+		if not self.getNextBlank(b):
+			return True
+		else:
+			xPos = nextBlock[0]
+			yPos = nextBlock[1]
+
+		
 
 		for i in range(1,10):
-			if isValid(xPos,yPos,i):
+			if self.isValid(xPos,yPos,i):
 				b[xPos][yPos] = i
 
-		solvePuzzle(b)
+
+				if self.solvePuzzle(b):
+					return True
+
+
+				b[xPos][yPos] = 0
+
+		return False
 
 	
 
@@ -72,6 +87,7 @@ for x in range(9):
 	print(sudokuBoard[x])
 
 solver.solvePuzzle(sudokuBoard)
+print()
 
 for x in range(9):
 	print(sudokuBoard[x])
