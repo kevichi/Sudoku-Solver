@@ -5,7 +5,7 @@ class Solver:
 		self.board = board
 		self.size =9
 
-		print("welcome to sudoku solver")
+		print("Welcome to Sudoku solver, developed by Hai Muo Cui")
 	
 	def checkRow(self, row, value):
 		for i in range(9):
@@ -88,6 +88,7 @@ for x in range(9):
 
 solver.solvePuzzle(sudokuBoard)
 print()
+print("Completed Sudoku puzzle")
 
 for x in range(9):
 	print(sudokuBoard[x])
